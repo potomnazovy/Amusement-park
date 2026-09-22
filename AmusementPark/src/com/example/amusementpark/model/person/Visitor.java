@@ -34,4 +34,14 @@ public abstract class Visitor extends Person
 
     this.money -= amount;
   }
+
+  public void refund(int cash)
+  {
+    if (cash < 0)
+    {
+      throw new IllegalArgumentException("Не воруй кровные мои!");
+    }
+
+    this.money += cash;
+  }
 }

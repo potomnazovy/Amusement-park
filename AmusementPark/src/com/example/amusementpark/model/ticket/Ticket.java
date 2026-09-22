@@ -104,4 +104,27 @@ public class Ticket
     return "Ticket[# " + id + " , купленный по цене " + price + " руб, имеет тип " + type.getDisplayName() +
       " и принадлежит посетителю " + owner.getName() + " ]";
   }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
+      return true;
+    }
+
+    if (o == null || this.getClass() != o.getClass())
+    {
+      return false;
+    }
+
+    Ticket ticket = (Ticket) o;
+    return id.equals(ticket.id);
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return id.hashCode();
+  }
 }
