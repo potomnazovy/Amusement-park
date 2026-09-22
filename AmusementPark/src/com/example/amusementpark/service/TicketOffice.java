@@ -16,8 +16,8 @@ public class TicketOffice
   private final int basePrice;
   private final List< Ticket > soldTickets = new ArrayList<>();
   private int ticketId = 1;
-  private int cashInDrawer;
-  private int totalRevenue;
+  private int cashInDrawer; // физические деньги в кассе (для возвратов)
+  private int totalRevenue; // полная выручка за все время
 
   public TicketOffice(int basePrice, int cashInDrawer)
   {
@@ -118,7 +118,7 @@ public class TicketOffice
   {
     if (ticket == null)
     {
-      throw new IllegalArgumentException("Поле типа билета не может быть пустым");
+      throw new IllegalArgumentException("Билет не может быть пустым");
     }
 
     if (!soldTickets.contains(ticket))
