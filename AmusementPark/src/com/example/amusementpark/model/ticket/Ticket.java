@@ -8,25 +8,25 @@ import java.time.LocalDateTime;
 
 public class Ticket
 {
-  private final int price;
   private final String id;
+  private final int price;
   private final Visitor owner;
   private final Employee seller;
   private final TicketType type;
   private final LocalDateTime purchasedAt;
   private final LocalDateTime validUntil;
 
-  public Ticket(int price, String id, Visitor owner,
+  public Ticket(String id, int price, Visitor owner,
     Employee seller, TicketType type)
   {
-    if (price <= 0)
-    {
-      throw new IllegalArgumentException("Цена билета должна быть положительной");
-    }
-
     if (id == null || id.isBlank())
     {
       throw new IllegalArgumentException("ID билета не может быть пустым полем");
+    }
+
+    if (price < 0)
+    {
+      throw new IllegalArgumentException("Цена билета не должна быть отрицательной");
     }
 
     if (owner == null)
@@ -39,8 +39,13 @@ public class Ticket
       throw new IllegalArgumentException("Продавец билета обязательно должен быть указан");
     }
 
-    this.price = price;
+    if (type == null)
+    {
+      throw new IllegalArgumentException("Тип билета не может быть пустым полем");
+    }
+
     this.id = id;
+    this.price = price;
     this.owner = owner;
     this.seller = seller;
     this.type = type;
@@ -48,14 +53,14 @@ public class Ticket
     this.validUntil = LocalDate.now().atTime(23, 59, 59);
   }
 
-  public int getPrice()
-  {
-    return this.price;
-  }
-
   public String getId()
   {
     return this.id;
+  }
+
+  public int getPrice()
+  {
+    return this.price;
   }
 
   public Visitor getOwner()
@@ -88,7 +93,7 @@ public class Ticket
     return LocalDateTime.now().isBefore(validUntil);
   }
 
-  public boolean isSkipQueue()
+  public boolean skipsQueue()
   {
     return type.isSkipQueue();
   }
@@ -97,6 +102,6 @@ public class Ticket
   public String toString()
   {
     return "Ticket[# " + id + " , купленный по цене " + price + " руб, имеет тип " + type.getDisplayName() +
-      " и принадлежит посетителю " + owner;
+      " и принадлежит посетителю " + owner.getName() + " ]";
   }
 }

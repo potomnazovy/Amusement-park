@@ -6,18 +6,18 @@ public enum TicketType
   ADULT(1.0, false),
   FAST_PASS(2.0, true);
 
-  private double priceСoefficient;
-  private boolean skipQueue;
+  private final double priceCoefficient;
+  private final boolean skipQueue;
 
-  TicketType(double priceСoefficient, boolean skipQueue)
+  TicketType(double priceCoefficient, boolean skipQueue)
   {
-    this.priceСoefficient = priceСoefficient;
+    this.priceCoefficient = priceCoefficient;
     this.skipQueue = skipQueue;
   }
 
   public double getPriceCoefficient()
   {
-    return this.priceСoefficient;
+    return this.priceCoefficient;
   }
 
   public boolean isSkipQueue()
@@ -31,7 +31,7 @@ public enum TicketType
     {
       case CHILD -> "Детский";
       case ADULT -> "Взрослый";
-      case FAST_PASS -> "Без очереди";
+      case FAST_PASS -> "FAST_PASS";
     };
   }
 }
