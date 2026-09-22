@@ -6,18 +6,18 @@ public enum TicketType
   ADULT(1.0, false),
   FAST_PASS(2.0, true);
 
-  private double price;
+  private double priceСoefficient;
   private boolean skipQueue;
 
-  TicketType(double price, boolean skipQueue)
+  TicketType(double priceСoefficient, boolean skipQueue)
   {
-    this.price = price;
+    this.priceСoefficient = priceСoefficient;
     this.skipQueue = skipQueue;
   }
 
-  public double getPrice()
+  public double getPriceCoefficient()
   {
-    return this.price;
+    return this.priceСoefficient;
   }
 
   public boolean isSkipQueue()
