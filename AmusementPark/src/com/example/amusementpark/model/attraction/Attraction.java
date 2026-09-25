@@ -113,6 +113,11 @@ public abstract class Attraction
     return this.closeHour;
   }
 
+  public AttractionStatus getStatus()
+  {
+    return this.status;
+  }
+
   public void closeForManual()
   {
     this.status = AttractionStatus.CLOSED_MANUAL;
@@ -126,6 +131,11 @@ public abstract class Attraction
   public void closeForMaintenance()
   {
     this.status = AttractionStatus.CLOSED_MAINTENANCE;
+  }
+
+  public void closeForSchedule()
+  {
+    this.status = AttractionStatus.CLOSED_SCHEDULE;
   }
 
   public void reopen()

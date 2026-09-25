@@ -31,6 +31,7 @@ public class RollerCoaster extends Attraction
     {
       throw new IllegalArgumentException("Количество \"мертвых петель\" не должно быть отрицательным");
     }
+
     this.length = length;
     this.maxHeight = maxHeight;
     this.maxSpeed = maxSpeed;
