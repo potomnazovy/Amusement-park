@@ -59,7 +59,7 @@ public abstract class Attraction
 
     if (openHour == closeHour)
     {
-      throw new IllegalArgumentException("Часы открытия и закрытия не могу совпадать");
+      throw new IllegalArgumentException("Часы открытия и закрытия не могут совпадать");
     }
 
     this.price = price;
