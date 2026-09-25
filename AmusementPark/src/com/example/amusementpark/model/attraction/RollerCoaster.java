@@ -8,9 +8,9 @@ public class RollerCoaster extends Attraction
   private int loopsCount; //шт
 
   public RollerCoaster(int price, int capacity, int extremity, int rideDuration, int minHeight, int minWeight,
-    int openHour, int closeHour, AttractionStatus status, int length, int maxHeight, int maxSpeed, int loopsCount)
+    int openHour, int closeHour, int length, int maxHeight, int maxSpeed, int loopsCount)
   {
-    super(price, capacity, extremity, rideDuration, minHeight, minWeight, openHour, closeHour, status);
+    super(price, capacity, extremity, rideDuration, minHeight, minWeight, openHour, closeHour);
 
     if (length <= 0)
     {

@@ -7,7 +7,7 @@ public abstract class Attraction
   protected int extremity; //экстремальность аттракциона примем в пределах от 1 до 10
   protected int rideDuration; //продолжительность поездки на аттракционе примем в минутах
   protected int minHeight; //минимальный рост для посещения аттракциона в см
-  protected int minWeight; //минимальный вес для посещения аттракицона в кг
+  protected int minWeight; //минимальный вес для посещения аттракциона в кг
 
   protected int openHour;
   protected int closeHour;
@@ -15,7 +15,7 @@ public abstract class Attraction
   protected AttractionStatus status;
 
   protected Attraction(int price, int capacity, int extremity, int rideDuration,
-    int minHeight, int minWeight, int openHour, int closeHour, AttractionStatus status)
+    int minHeight, int minWeight, int openHour, int closeHour)
   {
     if (price <= 0)
     {
@@ -133,11 +133,6 @@ public abstract class Attraction
     this.status = AttractionStatus.CLOSED_MAINTENANCE;
   }
 
-  public void closeForSchedule()
-  {
-    this.status = AttractionStatus.CLOSED_SCHEDULE;
-  }
-
   public void reopen()
   {
     this.status = AttractionStatus.OPEN;
@@ -165,6 +160,21 @@ public abstract class Attraction
     {
       return openHour <= hour || hour < closeHour;
     }
+  }
+
+  public AttractionStatus getStatusAt(int hour)
+  {
+    if (isBlocked())
+    {
+      return this.status;
+    }
+
+    if (!isOpenAt(hour))
+    {
+      return AttractionStatus.CLOSED_SCHEDULE;
+    }
+
+    return AttractionStatus.OPEN;
   }
 
   public abstract String getType();

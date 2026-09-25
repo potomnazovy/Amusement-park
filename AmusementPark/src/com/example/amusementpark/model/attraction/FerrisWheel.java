@@ -7,9 +7,9 @@ public class FerrisWheel extends Attraction
   private int cabinsCapacity;
 
   public FerrisWheel(int price, int capacity, int extremity, int rideDuration, int minHeight, int minWeight,
-    int openHour, int closeHour, AttractionStatus status, int maxHeight, int cabinsCount, int cabinsCapacity)
+    int openHour, int closeHour, int maxHeight, int cabinsCount, int cabinsCapacity)
   {
-    super(price, capacity, extremity, rideDuration, minHeight, minWeight, openHour, closeHour, status);
+    super(price, capacity, extremity, rideDuration, minHeight, minWeight, openHour, closeHour);
 
     if (maxHeight <= 0)
     {

@@ -6,9 +6,9 @@ public class Carousel extends Attraction
   private String music;
 
   public Carousel(int price, int capacity, int extremity, int rideDuration, int minHeight, int minWeight,
-    int openHour, int closeHour, AttractionStatus status, int hoursesCount, String music)
+    int openHour, int closeHour, int hoursesCount, String music)
   {
-    super(price, capacity, extremity, rideDuration, minHeight, minWeight, openHour, closeHour, status);
+    super(price, capacity, extremity, rideDuration, minHeight, minWeight, openHour, closeHour);
 
     if (hoursesCount <= 0)
     {
