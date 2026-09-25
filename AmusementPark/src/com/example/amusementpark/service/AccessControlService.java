@@ -26,14 +26,34 @@ public class AccessControlService
 
     if (person.getHeight() < attraction.getMinHeight())
     {
-      throw new AccessDeniedException(person.getName() + " Не проходит по росту, так как его рост составляет " +
-        person.getHeight() + ", а нужно хотя бы " + attraction.getMinHeight());
+      throw new AccessDeniedException(person.getName() + " не проходит по росту, так как его рост составляет " +
+        person.getHeight() + " см, а нужно хотя бы " + attraction.getMinHeight() + " см");
     }
 
     if (person.getWeight() < attraction.getMinWeight())
     {
-      throw new AccessDeniedException(person.getName() + "Не проходит по весу, так как его вес составляет " +
-        person.getWeight() + ", а нужно хотя бы " + attraction.getMinWeight());
+      throw new AccessDeniedException(person.getName() + " не проходит по весу, так как его вес составляет " +
+        person.getWeight() + " кг, а нужно хотя бы " + attraction.getMinWeight() + " кг");
     }
+  }
+
+  public boolean canAccess(Person person, Attraction attraction, int hour)
+  {
+    if (!attraction.isOpenAt(hour))
+    {
+      return false;
+    }
+
+    if (person.getHeight() < attraction.getMinHeight())
+    {
+      return false;
+    }
+
+    if (person.getWeight() < attraction.getMinWeight())
+    {
+      return false;
+    }
+
+    return true;
   }
 }
