@@ -21,8 +21,15 @@ public class ConsoleMenu
 
   public ConsoleMenu(Park park, SimulationService simulation)
   {
-    if (park == null)       throw new IllegalArgumentException("Парк обязателен");
-    if (simulation == null) throw new IllegalArgumentException("SimulationService обязателен");
+    if (park == null)
+    {
+      throw new IllegalArgumentException("Парк обязателен");
+    }
+
+    if (simulation == null)
+    {
+      throw new IllegalArgumentException("SimulationService обязателен");
+    }
 
     this.park = park;
     this.simulation = simulation;
@@ -40,7 +47,11 @@ public class ConsoleMenu
         case 1 -> showAttractions();
         case 2 -> runSimulation();
         case 3 -> showLastReport();
-        case 0 -> { System.out.println("До встречи!"); return; }
+        case 0 ->
+        {
+          System.out.println("До встречи!");
+          return;
+        }
         default -> System.out.println("Неверный выбор. Попробуйте снова.");
       }
     }
@@ -63,6 +74,7 @@ public class ConsoleMenu
   {
     System.out.print(prompt);
     String line = scanner.nextLine().trim();
+
     try
     {
       return Integer.parseInt(line);
@@ -75,7 +87,7 @@ public class ConsoleMenu
 
   private void showAttractions()
   {
-    List<Attraction> attractions = park.getAllAttractions();
+    List< Attraction > attractions = park.getAllAttractions();
 
     if (attractions.isEmpty())
     {
@@ -91,6 +103,7 @@ public class ConsoleMenu
     for (int i = 0; i < attractions.size(); i++)
     {
       Attraction a = attractions.get(i);
+
       System.out.println();
       System.out.println((i + 1) + ". " + a.getType());
       System.out.printf ("   Цена билета:            %d руб.%n", a.getPrice());
