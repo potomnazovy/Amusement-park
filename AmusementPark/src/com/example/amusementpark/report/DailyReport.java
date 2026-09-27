@@ -39,33 +39,33 @@ public class DailyReport
     return this.totalRevenue;
   }
 
-  public int incrementVisitorsCame()
+  public void incrementVisitorsCame()
   {
-    return this.visitorsCame++;
+    this.visitorsCame++;
   }
 
-  public int incrementTicketsSold()
+  public void incrementTicketsSold()
   {
-    return this.ticketsSold++;
+    this.ticketsSold++;
   }
 
-  public int incrementDeniedInCashier()
+  public void incrementDeniedInCashier()
   {
-    return this.deniedInCashier++;
+    this.deniedInCashier++;
   }
 
-  public int incrementRidesCompleted()
+  public void incrementRidesCompleted()
   {
-    return this.ridesCompleted++;
+    this.ridesCompleted++;
   }
 
-  public int incrementDeniedByAccess()
+  public void incrementDeniedByAccess()
   {
-    return this.deniedByAccess;
+    this.deniedByAccess++;
   }
 
-  public int incrementTotalRevenue()
+  public void addRevenue(int amount)
   {
-    return this.totalRevenue++;
+    this.totalRevenue += amount;
   }
 }

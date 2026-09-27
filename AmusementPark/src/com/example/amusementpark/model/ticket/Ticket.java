@@ -1,6 +1,7 @@
 package com.example.amusementpark.model.ticket;
 
 import com.example.amusementpark.model.person.Visitor;
+import com.example.amusementpark.model.attraction.Attraction;
 import com.example.amusementpark.model.person.Employee;
 
 import java.time.LocalDate;
@@ -13,11 +14,12 @@ public class Ticket
   private final Visitor owner;
   private final Employee seller;
   private final TicketType type;
+  private final Attraction attraction;
   private final LocalDateTime purchasedAt;
   private final LocalDateTime validUntil;
 
   public Ticket(String id, int price, Visitor owner,
-    Employee seller, TicketType type)
+    Employee seller, TicketType type, Attraction attraction)
   {
     if (id == null || id.isBlank())
     {
@@ -43,12 +45,18 @@ public class Ticket
     {
       throw new IllegalArgumentException("Тип билета не может быть пустым полем");
     }
+    
+    if (attraction == null)
+    {
+      throw new IllegalArgumentException("Аттракцион должен быть указан");
+    }
 
     this.id = id;
     this.price = price;
     this.owner = owner;
     this.seller = seller;
     this.type = type;
+    this.attraction = attraction;
     this.purchasedAt = LocalDateTime.now();
     this.validUntil = LocalDate.now().atTime(23, 59, 59);
   }
@@ -78,6 +86,11 @@ public class Ticket
     return this.type;
   }
 
+  public Attraction getAttraction()
+  {
+    return this.attraction;
+  }
+
   public LocalDateTime getPurchasedAt()
   {
     return this.purchasedAt;
@@ -101,8 +114,9 @@ public class Ticket
   @Override
   public String toString()
   {
-    return "Ticket[# " + id + " , купленный по цене " + price + " руб, имеет тип " + type.getDisplayName() +
-      " и принадлежит посетителю " + owner.getName() + " ]";
+    return "Ticket[#" + id + ", " + type.getDisplayName()
+      + ", " + price + " руб., на " + attraction.getType()
+      + ", владелец: " + owner.getName() + "]";
   }
 
   @Override

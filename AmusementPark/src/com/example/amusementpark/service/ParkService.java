@@ -30,9 +30,9 @@ public class ParkService
     this.accessControl = new AccessControlService();
   }
 
-  public Ticket buyTicket(Visitor visitor, TicketType type, Employee employee)
+  public Ticket buyTicket(Visitor visitor, TicketType type, Employee employee, Attraction attraction)
   {
-    return ticketOffice.sellTicket(visitor, type, employee);
+    return ticketOffice.sellTicket(visitor, type, employee, attraction);
   }
 
   public void ride(Visitor visitor, Attraction attraction, int hour)

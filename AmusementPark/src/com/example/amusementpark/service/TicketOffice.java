@@ -5,6 +5,7 @@ import com.example.amusementpark.model.ticket.Ticket;
 import com.example.amusementpark.model.ticket.TicketType;
 import com.example.amusementpark.model.person.VipVisitor;
 import com.example.amusementpark.exception.InsufficientFundsException;
+import com.example.amusementpark.model.attraction.Attraction;
 import com.example.amusementpark.model.person.Employee;
 
 import java.util.List;
@@ -13,32 +14,20 @@ import java.util.Collections;
 
 public class TicketOffice
 {
-  private final int basePrice;
   private final List< Ticket > soldTickets = new ArrayList<>();
   private int ticketId = 1;
   private int cashInDrawer; // физические деньги в кассе (для возвратов)
   private int totalRevenue; // полная выручка за все время
 
-  public TicketOffice(int basePrice, int cashInDrawer)
+  public TicketOffice(int cashInDrawer)
   {
-    if (basePrice <= 0)
-    {
-      throw new IllegalArgumentException("Базовая цена билета должна быть положительной");
-    }
-
     if (cashInDrawer < 0)
     {
       throw new IllegalArgumentException("Начальная сумма для сдачи должна быть положительной");
     }
 
-    this.basePrice = basePrice;
     this.cashInDrawer = cashInDrawer;
     this.totalRevenue = 0;
-  }
-
-  public int getBasePrice()
-  {
-    return this.basePrice;
   }
 
   public List< Ticket > getSoldTickets()
@@ -66,9 +55,9 @@ public class TicketOffice
     return "T-" + String.format("%05d", ticketId++);
   }
 
-  private int calculatePrice(TicketType type, Visitor visitor)
+  private int calculatePrice(TicketType type, Visitor visitor, Attraction attraction)
   {
-    double price = basePrice * type.getPriceCoefficient();
+    double price = attraction.getPrice() * type.getPriceCoefficient();
     if (visitor instanceof VipVisitor vip)
     {
       double remainder = (1 - vip.getDiscount());
@@ -78,7 +67,7 @@ public class TicketOffice
     return (int) Math.round(price);
   }
 
-  public Ticket sellTicket(Visitor visitor, TicketType type, Employee employee)
+  public Ticket sellTicket(Visitor visitor, TicketType type, Employee employee, Attraction attraction)
   {
     if (visitor == null)
     {
@@ -95,7 +84,14 @@ public class TicketOffice
       throw new IllegalArgumentException("Продавец должен быть указан для покупки билета");
     }
 
-    int ticketPrice = calculatePrice(type, visitor);
+    if (type == TicketType.CHILD && visitor.getAge() >= 14)
+    {
+      throw new IllegalArgumentException(
+        "Детский билет доступен только до 14 лет, а " + visitor.getName()
+        + " — " + visitor.getAge() + " лет");
+    }
+
+    int ticketPrice = calculatePrice(type, visitor, attraction);
 
     if (visitor.getMoney() < ticketPrice)
     {
@@ -108,7 +104,7 @@ public class TicketOffice
     this.totalRevenue += ticketPrice;
 
     String id = generateTicketId();
-    Ticket ticket = new Ticket(id, ticketPrice, visitor, employee, type);
+    Ticket ticket = new Ticket(id, ticketPrice, visitor, employee, type, attraction);
     soldTickets.add(ticket);
 
     return ticket;
